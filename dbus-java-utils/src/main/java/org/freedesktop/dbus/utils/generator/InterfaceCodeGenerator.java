@@ -398,7 +398,14 @@ public class InterfaceCodeGenerator {
                 System.exit(0);
             } else if ("--outputDir".equals(p) || "-o".equals(p)) {
                 if (args.length > i) {
-                    outputDir = args[i++];
+                    outputDir = args[++i];
+                } else {
+                    printHelp();
+                    System.exit(0);
+                }
+            } else if ("--objectPath".equals(p) || "-p".equals(p)) {
+                if (args.length > i) {
+                    objectPath = args[++i];
                 } else {
                     printHelp();
                     System.exit(0);
@@ -464,9 +471,10 @@ public class InterfaceCodeGenerator {
     private static void printHelp() {
         System.out.println("Syntax: <options> [busname object]");
         System.out.println("        Options: ");
-        System.out.println("        --system          | -y           Use SYSTEM DBus");
-        System.out.println("        --session         | -s           Use SESSION DBus");
-        System.out.println("        --outputDir <Dir> | -o <Dir>     Use <Dir> as output directory for all generated files");
+        System.out.println("        --system            | -y           Use SYSTEM DBus");
+        System.out.println("        --session           | -s           Use SESSION DBus");
+        System.out.println("        --outputDir <Dir>   | -o <Dir>     Use <Dir> as output directory for all generated files");
+        System.out.println("        --objectPath <Path> | -p <Path>    Use <Path> as the DBus object path");
         System.out.println("");
         System.out.println("        --enable-dtd-validation          Enable DTD validation of introspection XML");
         System.out.println("        --version                        Show version information");
